@@ -10,7 +10,7 @@ export const work1: Work = {
  title: "ペンタクト",
  genre: "アクションゲーム",
  producersNumber: 4,
-  playUrl: "https://example.com/pentact",
+  playUrl: "https://miyosisouta.github.io/ProjectGB-Portfolio.github.io/",
 };
 export const work2: Work = {
   title: "宇宙ラリー",

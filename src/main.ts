@@ -51,10 +51,18 @@ function showDetail(member: Member){
 
     // ゲーム作品のカード一覧
     const gameWorkHtml = member.gameworks.map((gameWork) =>             // 複数の作品を一つずつ
-        `<div class="work-card">                                   
-            <h3>${gameWork.title}</h3>                                  
-            <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>    
-        </div>`
+        gameWork.playUrl
+        // URLがあるなら
+        ? `<a class="work-card" href="${gameWork.playUrl}" target="_blank" rel="noopener noreferrer">
+           <h3>${gameWork.title}</h3>                                  
+           <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>
+           <span class="work-link">作品ページを見る →</span>
+           </a>`
+        // URLがないなら
+        : `<div class="work-card">
+           <h3>${gameWork.title}</h3>                                  
+           <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>    
+           </div>`
     )
     .join(""); // 1つの文字列に変換
 
