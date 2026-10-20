@@ -21,7 +21,7 @@ const buttonHtml = members.map((member) =>
 .join("");
 
 app.innerHTML = `
-    ${buttonHtml}
+    <div class="member-list">${buttonHtml}</div>
     <div id="detail"></div>
 `;
 
@@ -44,13 +44,14 @@ buttons.forEach((button, index) => {                    // メンバーカード
 showDetail(members[0]); // 太郎さんを出す
 
 
+// カードを表示
 function showDetail(member: Member){
     // 選んだ一人の紹介(名前と紹介文)
     const detailHtml = `<h2>${member.name}</h2><p>${member.introduction}</p>`
 
     // ゲーム作品のカード一覧
     const gameWorkHtml = member.gameworks.map((gameWork) =>             // 複数の作品を一つずつ
-        `<div class="game-card-List">                                   
+        `<div class="work-card">                                   
             <h3>${gameWork.title}</h3>                                  
             <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>    
         </div>`
@@ -60,6 +61,6 @@ function showDetail(member: Member){
     // 設定した名前・紹介文・ゲーム作品カード一覧を表示・切り替え
     detail.innerHTML = `
         ${detailHtml}
-        ${gameWorkHtml}
+        <div class="work-list">${gameWorkHtml}</div>
     `;
 }
