@@ -57,14 +57,14 @@ export const member1: Member = {
 export const member2: Member =
 {
   name: "河原次郎",
-  introduction: "次郎",
+  introduction: "次郎です",
   gameworks: gameWorks2
 }
 
 export const member3: Member =
 {
   name: "河原三郎",
-  introduction: "三郎",
+  introduction: "三郎です",
   gameworks: gameWorks3
 }
 
