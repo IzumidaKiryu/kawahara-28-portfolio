@@ -1,0 +1,16 @@
+{
+    "name": "河原次郎",
+    "introduction": "次郎です。",
+    "works": [
+        {
+            "title": "ふらふらスピング",
+            "genre": "野球ゲーム",
+            "producersNumber": 3
+        },
+        {
+            "title": "Moofo",
+            "genre": "アクションゲーム",
+            "producersNumber": 3
+        }
+    ]
+}

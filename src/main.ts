@@ -1,12 +1,16 @@
 // main.ts = TypeScript
 // ウェブサイトの「動き」を作るためのもの
 
+///////////////////////////////////// ここからが他ファイルとの関係 ////////////////////////////////////////////////////////////
+
 // 練習用スクリプトをインポート
 // コメントアウトするか否かでコンソールでのログの確認等を行うことができる
 // import "./practice";
-
 import "./style.css"
 import { members, type Member } from "./data";
+
+
+///////////////////////////////////// ここからが中身 ////////////////////////////////////////////////////////////
 
 // 入れ物を取得
 const app = document.querySelector<HTMLDivElement>("#app")!;
@@ -41,7 +45,14 @@ buttons.forEach((button, index) => {                    // メンバーカード
     
 });
 
-showDetail(members[0]); // 太郎さんを出す
+
+// チェック : メンバーが一人でも登録されているか、されてないなら画面に表示
+if(members.length >= 1){
+    showDetail(members[0]); // 1人目を出す
+} else {
+    const notMemberMessage = "<p>誰も登録されていません</p>";
+    detail.innerHTML = notMemberMessage;
+}
 
 
 // カードを表示
@@ -50,10 +61,10 @@ function showDetail(member: Member){
     const detailHtml = `<h2>${member.name}</h2><p>${member.introduction}</p>`
 
     // ゲーム作品のカード一覧
-    const gameWorkHtml = member.gameworks.map((gameWork) =>             // 複数の作品を一つずつ
-        gameWork.playUrl
+    const gameWorkHtml = member.works.map((gameWork) =>             // 複数の作品を一つずつ
+        gameWork.pageUrl
         // URLがあるなら
-        ? `<a class="work-card" href="${gameWork.playUrl}" target="_blank" rel="noopener noreferrer">
+        ? `<a class="work-card" href="${gameWork.pageUrl}" target="_blank" rel="noopener noreferrer">
            <h3>${gameWork.title}</h3>                                  
            <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>
            <span class="work-link">作品ページを見る →</span>

@@ -3,14 +3,14 @@ export interface Work { // 「ゲーム作品なら、必ずこの項目があ�
   title: string; // タイトルは文字列
   genre: string; // ジャンルは文字列
   producersNumber: number; // 制作人数は数値
-  playUrl?: string; // プレイできるURL(ない作品もある)
+  pageUrl?: string; // 作品ページのURL(ない作品もある)
 }
 
 export const work1: Work = {
  title: "ペンタクト",
  genre: "アクションゲーム",
  producersNumber: 4,
-  playUrl: "https://miyosisouta.github.io/ProjectGB-Portfolio.github.io/",
+  pageUrl: "https://miyosisouta.github.io/ProjectGB-Portfolio.github.io/",
 };
 export const work2: Work = {
   title: "宇宙ラリー",
@@ -33,9 +33,9 @@ export const work5: Work = {
   producersNumber: 3,
 };
 
-export const gameWorks1: Work[] = [work1, work2];
-export const gameWorks2: Work[] = [work3, work4];
-export const gameWorks3: Work[] = [work1, work3, work5];
+export const works1: Work[] = [work1, work2];
+export const works2: Work[] = [work3, work4];
+export const works3: Work[] = [work1, work3, work5];
 
 // 全ての作品を集めた
 export const allWorks: Work[]  =[work1, work2, work3, work4, work5]; 
@@ -45,28 +45,36 @@ export const allWorks: Work[]  =[work1, work2, work3, work4, work5];
 export interface Member {
   name: string;
   introduction: string;
-  gameworks: Work[];
+  works: Work[];
+  hidden?: boolean;
 }
 
 export const member1: Member = {
   name: "河原太郎",
   introduction: "テストです。",
-  gameworks: gameWorks1
+  works: works1
 }
 
 export const member2: Member =
 {
   name: "河原次郎",
   introduction: "次郎です",
-  gameworks: gameWorks2
+  works: works2
 }
 
 export const member3: Member =
 {
   name: "河原三郎",
   introduction: "三郎です",
-  gameworks: gameWorks3
+  works: works3
 }
 
-// 全メンバー
-export const members: Member[] = [member1,member2,member3];
+
+// members フォルダの JSON を全部読み込む（_ で始まるお手本は除く）
+const memberFiles = import.meta.glob<Member>(   // Viteの機能 : フォルダの中のファイルをまとめて読み込む
+  ["/members/*.json", "!/members/_*.json"],     // membersフォルダの.jsonで終わるファイル全部。_で始まる.jsonは除く。
+  { eager: true, import: "default" }            // eager: 今すぐ読み込むか , import: "default" → ファイルの中身を頂戴
+);
+
+// 全メンバー : hiddenがfalseのものは写さないのでフィルターではじく
+export const members: Member[] = Object.values(memberFiles).filter((member) => member.hidden !== true);

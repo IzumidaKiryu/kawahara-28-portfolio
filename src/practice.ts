@@ -1,4 +1,4 @@
-import { members, member1, allWorks, gameWorks1 } from "./data";
+import { members, member1, allWorks, works1 } from "./data";
 
 // ハンズオン1 : 変数と型
 const name: string = "河原 太郎";
@@ -34,10 +34,10 @@ console.log(`${name}さんが最後に出したゲームタイトル : ${gameTit
 //console.log(work.genre);
 
 
-console.log(gameWorks1[0].title);
-console.log(gameWorks1[1].title);
+console.log(works1[0].title);
+console.log(works1[1].title);
 
-console.log(`「${member1.name}さんの作品数: ${member1.gameworks.length}/1本目 : ${member1.gameworks[0].title}」`);
+console.log(`「${member1.name}さんの作品数: ${member1.works.length}/1本目 : ${member1.works[0].title}」`);
 
 
 // ハンズオン4 : 配列の操作(前半)
@@ -49,7 +49,7 @@ members.forEach(name => {
 });
 
 // メンバーが作成した作品の一覧
-member1.gameworks.forEach(gameWork =>{
+member1.works.forEach(gameWork =>{
   console.log(`${gameWork.title}: ${gameWork.genre}`)
 });
 
@@ -66,7 +66,7 @@ const memberToNames = members.map((member) => member.name);
 console.log(memberToNames);
 
 // 作品の一覧表示
-const workList = member1.gameworks.map((work) => `${work.title}(${work.genre})`);
+const workList = member1.works.map((work) => `${work.title}(${work.genre})`);
 console.log(workList);
 
 // アクションゲームだけ集める
