@@ -3,9 +3,6 @@
 
 ///////////////////////////////////// ここからが他ファイルとの関係 ////////////////////////////////////////////////////////////
 
-// 練習用スクリプトをインポート
-// コメントアウトするか否かでコンソールでのログの確認等を行うことができる
-// import "./practice";
 import "./style.css"
 import { members, type Member } from "./data";
 
@@ -19,7 +16,7 @@ const app = document.querySelector<HTMLDivElement>("#app")!;
 const buttonHtml = members.map((member) => 
     `<button class="member-card"> 
       <span class="name">${member.name}</span>
-      <span class="intro">${member.introduction}</span> 
+      <span class="intro">${member.comment}</span> 
     </button>`
 )
 .join("");
@@ -58,7 +55,7 @@ if(members.length >= 1){
 // カードを表示
 function showDetail(member: Member){
     // 選んだ一人の紹介(名前と紹介文)
-    const detailHtml = `<h2>${member.name}</h2><p>${member.introduction}</p>`
+    const detailHtml = `<h2>${member.name}</h2><p>${member.comment}</p>`
 
     // ゲーム作品のカード一覧
     const gameWorkHtml = member.works.map((gameWork) =>             // 複数の作品を一つずつ
@@ -66,13 +63,13 @@ function showDetail(member: Member){
         // URLがあるなら
         ? `<a class="work-card" href="${gameWork.pageUrl}" target="_blank" rel="noopener noreferrer">
            <h3>${gameWork.title}</h3>                                  
-           <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>
+           <p>${gameWork.genre} / ${gameWork.teamSize}人</p>
            <span class="work-link">作品ページを見る →</span>
            </a>`
         // URLがないなら
         : `<div class="work-card">
            <h3>${gameWork.title}</h3>                                  
-           <p>${gameWork.genre} / ${gameWork.producersNumber}人</p>    
+           <p>${gameWork.genre} / ${gameWork.teamSize}人</p>    
            </div>`
     )
     .join(""); // 1つの文字列に変換

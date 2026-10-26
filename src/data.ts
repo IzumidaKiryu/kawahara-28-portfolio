@@ -1,80 +1,71 @@
-////////// 作品データの定義 ///////////////////////
+// 希望職業の一覧
+export type Job = 
+  | "グラフィックス" 
+  | "テクニカルアーティスト" 
+  | "ゲームプレイ" 
+  | "AI" 
+  | "物理・当たり判定" 
+  | "エンジン開発" 
+  | "ツール・エディタ" 
+  | "UI" 
+  | "ネットワーク・サーバー" 
+  | "企画・レベルデザイン";
+
+
+////////// メンバーデータの定義 ///////////////////////
+export interface ProfileItem {
+  text: string;
+  photo: string;
+}
+
+export interface QAndA {
+  question: string;
+  answer: string;
+}
+
 export interface Work { // 「ゲーム作品なら、必ずこの項目があるべき」という形のルールを決める
-  title: string; // タイトルは文字列
-  genre: string; // ジャンルは文字列
-  producersNumber: number; // 制作人数は数値
-  pageUrl?: string; // 作品ページのURL(ない作品もある)
+  title: string;            // タイトルは文字列
+  genre: string;            // ジャンルは文字列
+  thumbnail: string;        // 作品のサムネイル
+  platforms: string[];      // 制作環境
+  teamSize: number;         // 制作人数
+  role: string;             // 役割
+  period: string;           // 制作期間
+  pageUrl: string;          // 作品ページのURL
 }
 
-export const work1: Work = {
- title: "ペンタクト",
- genre: "アクションゲーム",
- producersNumber: 4,
-  pageUrl: "https://miyosisouta.github.io/ProjectGB-Portfolio.github.io/",
-};
-export const work2: Work = {
-  title: "宇宙ラリー",
-  genre: "レースゲーム",
-  producersNumber: 1,
-};
-export const work3: Work = {
-  title: "ふらふらスピング",
-  genre: "野球ゲーム",
-  producersNumber: 3,
-};
-export const work4: Work = {
-  title: "Moofo",
-  genre: "アクションゲーム",
-  producersNumber: 3,
-};
-export const work5: Work = {
-  title: "わちゃわちゃパーティ",
-  genre: "パーティーゲーム",
-  producersNumber: 3,
-};
-
-export const works1: Work[] = [work1, work2];
-export const works2: Work[] = [work3, work4];
-export const works3: Work[] = [work1, work3, work5];
-
-// 全ての作品を集めた
-export const allWorks: Work[]  =[work1, work2, work3, work4, work5]; 
-
-
-///////////// メンバーデータの集合体 ////////////////////////
-export interface Member {
-  name: string;
-  introduction: string;
-  works: Work[];
-  hidden?: boolean;
-}
-
-export const member1: Member = {
-  name: "河原太郎",
-  introduction: "テストです。",
-  works: works1
-}
-
-export const member2: Member =
-{
-  name: "河原次郎",
-  introduction: "次郎です",
-  works: works2
-}
-
-export const member3: Member =
-{
-  name: "河原三郎",
-  introduction: "三郎です",
-  works: works3
+// メンバーデータ（JSON に書いてある形）：後輩が profile.json に書くもの
+export interface MemberJson {
+  name: string;           // 名前(漢字)
+  nameRomaji: string;     // 名前(ローマ字)
+  photo: string;          // プロフィール画像
+  jobs: Job[];            // 希望職業
+  comment: string;        // 一言コメント
+  githubUrl: string;      // githubのURL
+  hobby: ProfileItem;     // 趣味
+  talent: ProfileItem;    // 特技
+  qa: QAndA;              // 自由 : Q＆A
+  works: Work[];          // 作品
+  hidden: boolean;        // ウェブサイトに表示するか否か
 }
 
 
-// members フォルダの JSON を全部読み込む（_ で始まるお手本は除く）
-const memberFiles = import.meta.glob<Member>(   // Viteの機能 : フォルダの中のファイルをまとめて読み込む
-  ["/members/*.json", "!/members/_*.json"],     // membersフォルダの.jsonで終わるファイル全部。_で始まる.jsonは除く。
+// メンバーデータ（サイトで使う形）：JSON の中身 ＋ プログラムが付け足す id
+export interface Member extends MemberJson {
+  id: string; // ID
+}
+
+// members フォルダの中の各フォルダから profile.json を全部読み込む（_ で始まるお手本フォルダは除く）
+const memberFiles = import.meta.glob<MemberJson>(   // Viteの機能 : フォルダの中のファイルをまとめて読み込む
+  ["/members/*/profile.json", "!/members/_*/*.json"],     // membersフォルダの.jsonで終わるファイル全部。　_で始まる.jsonは除く。
   { eager: true, import: "default" }            // eager: 今すぐ読み込むか , import: "default" → ファイルの中身を頂戴
 );
 
+
 // 全メンバー : hiddenがfalseのものは写さないのでフィルターではじく
-export const members: Member[] = Object.values(memberFiles).filter((member) => member.hidden !== true);
+export const members: Member[] = Object.entries(memberFiles)    // パスと中身のペアを取り出す
+.map(([path,member]) => ({                                      // ペアを一つずつ作って、左を path,右を member という名前で受け取る
+  ...member,                                                    // 中身を全部(名前・写真・作品...etc)コピー
+  id: path.split("/")[2],                                       // パスを/で気って、2番目のフォルダ名をIDとする
+}))                                                               
+.filter((member) => member.hidden !== true);                    // hiddenの人を除く

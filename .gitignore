@@ -22,4 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-members/test*.json
+members/test1/
+members/test2/
