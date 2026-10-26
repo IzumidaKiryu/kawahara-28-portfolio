@@ -56,9 +56,9 @@ export interface Member extends MemberJson {
 }
 
 // members フォルダの中の各フォルダから profile.json を全部読み込む（_ で始まるお手本フォルダは除く）
-const memberFiles = import.meta.glob<MemberJson>(   // Viteの機能 : フォルダの中のファイルをまとめて読み込む
-  ["/members/*/profile.json", "!/members/_*/*.json"],     // membersフォルダの.jsonで終わるファイル全部。　_で始まる.jsonは除く。
-  { eager: true, import: "default" }            // eager: 今すぐ読み込むか , import: "default" → ファイルの中身を頂戴
+const memberFiles = import.meta.glob<MemberJson>(         // Viteの機能 : フォルダの中のファイルをまとめて読み込む
+  ["/members/*/profile.json", "!/members/_*/*.json"],     // 各フォルダの profile.json 全部。_ で始まるフォルダの中は除く
+  { eager: true, import: "default" }                      // eager: 今すぐ読み込むか , import: "default" → ファイルの中身を頂戴
 );
 
 
@@ -66,6 +66,6 @@ const memberFiles = import.meta.glob<MemberJson>(   // Viteの機能 : フォル
 export const members: Member[] = Object.entries(memberFiles)    // パスと中身のペアを取り出す
 .map(([path,member]) => ({                                      // ペアを一つずつ作って、左を path,右を member という名前で受け取る
   ...member,                                                    // 中身を全部(名前・写真・作品...etc)コピー
-  id: path.split("/")[2],                                       // パスを/で気って、2番目のフォルダ名をIDとする
+  id: path.split("/")[2],                                       // パスを/で切って、2番目のフォルダ名をIDとする
 }))                                                               
 .filter((member) => member.hidden !== true);                    // hiddenの人を除く
