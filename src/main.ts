@@ -22,6 +22,8 @@ const buttonHtml = members.map((member) =>
 .join("");
 
 app.innerHTML = `
+    <h1 class="page-title">28卒 メンバー一覧</h1>
+    <p class="page-lead">気になるメンバーをクリックすると、プロフィールと作品一覧が見られます。</p>
     <div class="member-list">${buttonHtml}</div>
     <div id="detail"></div>
 `;

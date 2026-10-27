@@ -1,8 +1,103 @@
+:root {
+  --color-accent: #15803D;
+  --color-tag-bg: #DCFCE7;
+  --color-tag-text: #166534;
+  --color-page-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-text: #0F172A;
+  --color-text-sub: #475569;
+  --color-line: #E2E8F0;
+  --color-button-line: #CBD5E1;
+}
+
+/* すべての要素で、幅に padding と枠線を含めて計算する */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 24px;
-  font-family: sans-serif;
-  background-color: #f5f5f5;
+  padding: 0;
+  font-family: "Noto Sans JP", sans-serif;  /* デザインのフォント。読めなければ普通のゴシック */
+  font-size: 15px;                          /* 本文の大きさ */
+  line-height: 1.7;                         /* 行間：文字の大きさの1.7倍 */
+  color: var(--color-text);                 /* 本文の文字色 */
+  background-color: var(--color-page-bg);
+}
+
+/* 中身の幅をそろえる箱（ヘッダーの中と、ページの中身で共通） */
+.container {
+  max-width: 1180px;   /* 最大幅。これより広い画面では、これ以上広がらない */
+  margin: 0 auto;      /* 左右の外側の余白を自動 → 真ん中に寄る */
+  padding: 0 24px;     /* 左右に 24px の内側の余白 */
+}
+
+/* ページの中身の上下の余白 */
+.page {
+  padding-top: 40px;
+  padding-bottom: 64px;
+}
+
+/* ヘッダーの緑の帯 */
+.site-header {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 18px 0;
+}
+
+/* ヘッダーの中身：左右の両端に寄せ、縦は真ん中でそろえる */
+.site-header .container {
+  display: flex;
+  justify-content: space-between;  /* 両端に寄せる */
+  align-items: center;             /* 縦の真ん中でそろえる */
+  gap: 16px;                       /* 狭い画面で近づいたときの最低限のすき間 */
+}
+
+/* 左側のかたまり（ロゴ＋サイト名） */
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 白い四角のロゴ（仮） */
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: white;
+  color: var(--color-accent);
+  font-weight: 700;
+  display: flex;               /* 中の文字を… */
+  align-items: center;         /* 縦の真ん中に */
+  justify-content: center;     /* 横の真ん中に */
+  flex-shrink: 0;              /* 画面が狭くても縮まない */
+}
+
+/* サイト名 */
+.site-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 学校名 */
+.school-name {
+  font-size: 14px;
+}
+
+/* ページの見出し「28卒 メンバー一覧」 */
+.page-title {
+  font-size: 32px;
+  line-height: 1.4;
+  margin: 0 0 8px;     /* 上・左右は0、下だけ 8px */
+}
+
+/* 見出しの下の案内文 */
+.page-lead {
+  margin: 0 0 24px;
+  color: var(--color-text-sub);   /* 補足の文字色（少し薄いグレー） */
 }
 
 .member-list {
