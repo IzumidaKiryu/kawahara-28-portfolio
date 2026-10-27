@@ -69,3 +69,15 @@ export const members: Member[] = Object.entries(memberFiles)    // パスと中�
   id: path.split("/")[2],                                       // パスを/で切って、2番目のフォルダ名をIDとする
 }))                                                               
 .filter((member) => member.hidden !== true);                    // hiddenの人を除く
+
+
+// members フォルダの画像を全部読み込む（キー：画像のパス、値：サイトで使える画像のURL）
+const imageFiles = import.meta.glob<string>(
+  "/members/*/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}",
+  { eager: true, query: "?url", import: "default" }
+);
+
+// メンバーの id と画像のファイル名から、画像のURLを取り出す（見つからなければ undefined）
+export function getImageUrl(memberId: string, fileName: string): string | undefined {
+  return imageFiles[`/members/${memberId}/${fileName}`];
+}
