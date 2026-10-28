@@ -1,0 +1,34 @@
+{
+  "name": "デモ 太郎",
+  "nameRomaji": "Demo taro",
+  "photo": "profile.jpg",
+  "jobs": ["グラフィックス", "ツール・エディタ"],
+  "comment": "描画処理を突き詰めるのが好きです",
+  "githubUrl": "https://github.com/",
+  "hobby": { "text": "温泉", "photo": "hobby.jpg" },
+  "talent": { "text": "変数名を30分以上考えること", "photo": "talent.jpg" },
+  "qa": { "question": "もし願いが一つかなうなら？", "answer": "変数名を考える必要がないようになりたい" },
+  "works": [
+    {
+      "title": "がぶっとバスター",
+      "genre": "3Dアクション",
+      "thumbnail": "work-a.jpg",
+      "platforms": ["DirectX 12"],
+      "teamSize": 2,
+      "role": "プレイヤー、エネミー",
+      "period": "6か月",
+      "pageUrl": "https://github.com/miyosisouta/ProjectGB"
+    },
+    {
+      "title": "",
+      "genre": "",
+      "thumbnail": "",
+      "platforms": [""],
+      "teamSize": 1,
+      "role": "",
+      "period": "",
+      "pageUrl": ""
+    }
+  ],
+  "hidden": false
+}
