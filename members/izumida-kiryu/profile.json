@@ -1,0 +1,23 @@
+{
+    "name":"泉田 希龍",
+    "nameRomaji": "Izumiya Kiryu",
+    "photo":"profile.jpg",
+    "jobs": ["エンジン開発", "ゲームプレイ"],
+    "comment":"スクフェスを復活させたい",
+    "githubUrl": "https://github.com/izumiya-kiryu",
+    "hobby": { "text": "推し活", "photo": "hobby.jpg" },
+    "talent":{"text": "一途", "photo": "talent.jpg" },
+    "qa": {"question": "もし宝くじが当たったら？", "answer": "あずにゃんにぜんつっぱ！！"},
+    "works": [ 
+    {
+        "title":"『Eternal Resonance ～青春の１ページには～』",
+        "genre":"リズムアクションRPG",
+        "thumbnail":"thumbnail.jpg",
+        "platforms":["自作エンジン", "DirectX 12"],
+        "teamSize": 1,
+        "role":"ALL",
+        "period":"1年"
+    }
+],
+    "hidden": false
+}
